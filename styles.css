@@ -1,9 +1,13 @@
 #Title {
     text-align: center;
-    
+
 }
 
 form {
     text-align: center;
 }
 
+.error {
+    border: 2px solid red;
+    border-radius: 4px;
+}
