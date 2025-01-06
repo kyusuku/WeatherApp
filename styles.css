@@ -26,7 +26,7 @@ form {
 #result {
     display: none;
     margin: 1em auto;
-    background: #f0f0f0;
+    background: #ffffff;
     padding: 0.1em 0;
     width: 10.5em;
     border-radius: 10px;
@@ -78,11 +78,17 @@ form {
 }
 
 #Textbox {
-    border-radius: 25px;
+    border-radius: 10px;
     padding: 5px;
     background-color: #fff; 
     border: 1px solid #ccc; 
     outline-color: #9198e5;
+}
+
+#Textbox:hover {
+    border-color: #9198e5;
+    box-shadow: 0 0 10px rgba(145, 152, 229, 0.5);
+    transform: scale(1.02);
 }
 
 #Button {
@@ -93,11 +99,30 @@ form {
     border-radius: 100px;
     /* etc... */
   }
+
+#Button:hover {
+    background-color: #9198e5;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(145, 152, 229, 0.5);
+    transform: scale(1.1);
+}
+
+#Textbox:hover, #Button:hover {
+    box-shadow: 0 0 10px rgba(145, 152, 229, 0.5);
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+#Textbox:focus {
+    border-color: #9198e5;
+    box-shadow: 0 0 10px rgba(145, 152, 229, 0.8);
+}
   
-  .material-symbols-outlined {
+.material-symbols-outlined {
     font-size: 24px;
     vertical-align: middle;
-  }
+}
+
 
 
 
