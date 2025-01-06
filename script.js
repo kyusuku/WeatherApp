@@ -9,10 +9,11 @@ button.addEventListener('click', () => {
 
     if (city) {
     // Display the typed city
+    textbox.classList.remove('error')
     resultDiv.innerHTML = `You entered: ${city}`;
     } else {
-    // Display a default message if no city was entered
-    resultDiv.innerHTML = 'Please enter a city name.';
+    textbox.classList.add('error'); 
     }
 });
 });
+
