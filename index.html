@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
 </head>
 <body>
     <h1 id="Title">
@@ -16,10 +18,17 @@
     </h1>
     <form>
         <input type="text" id="Textbox" placeholder="Enter City">
-        <input type="button" id="Button" value="Submit">
+        <button id="Button" type="button">
+            <span class="material-symbols-outlined">search</span>
+        </button>
     </form>
-    <div id="result"></div>
-    
+    <div id="result">
+        <div id="city"></div>
+        <div id="icon"></div>
+        <div id="temp"></div>
+        <div id="desc"></div>
+        <div id="minmax"></div>
+    </div>
 </body>
 <footer>
 
