@@ -1,7 +1,8 @@
+/* Reset and Base Styles */
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%; /* Full viewport height */
+    height: 100vh; /* Full viewport height */
     display: flex; /* Flexbox layout */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
@@ -10,6 +11,7 @@ html, body {
     color: white;
 }
 
+/* Title Styling */
 #Title {
     text-align: center;
     color: rgb(60, 60, 60);
@@ -18,72 +20,52 @@ html, body {
     font-size: 1.5em;
 }
 
+/* Form Styling */
 form {
     text-align: center;
 }
 
+/* Error Input Styling */
 .error {
     border: 2px solid red;
     border-radius: 4px;
 }
 
+/* Main Container */
 .container-all {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.65);
-    padding: 0.2em;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 0.2em 1em; /* Combined padding for top/bottom and left/right */
     border-radius: 40px;
     width: 100%;
     box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.25);
 }
 
+/* Top Section */
 .container-top {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Corrected from 'horizontal' to 'row' */
     align-items: center;
     justify-content: center;
 }
 
-/* #result {
-    display: none;
-    margin: 1em auto;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: inherit;
-    padding: 0.1em 0;
-    width: 30em;
-    border-radius: 40px;
-    box-shadow: 0px 1px 7px rgba(0,0,0, 0.25);
-} */
-
+/* Mid Section */
 .container-mid {
-    display: flex;
+    display: none; /* Hidden by default */
     flex-direction: column;
     margin: 1em auto;
     background-color: rgba(255, 255, 255, 0.1);
     color: inherit;
-    padding-bottom: 0.5em;
-    padding-top: 0.5em;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 0.5em 1em; /* Combined padding */
     width: 30em;
     border-radius: 20px;
     box-shadow: 0px 1px 7px rgba(0,0,0, 0.25);
 }
 
-.container-mid-t {
-    display: flex;
-    flex-direction: row; /* Corrected from 'horizontal' to 'row' */
-    align-items: center;
-    justify-content: space-between; /* Distributes space between child elements */
-    width: 100%; /* Ensure it takes full width of the parent */
-    padding: 0, 0em; /* Optional: Add horizontal padding */
-
-}
-
+/* Mid Top Left */
 .container-mid-tl {
     display: flex;
     flex-direction: column; /* Stack children vertically */
@@ -93,6 +75,7 @@ form {
     min-width: 0; /* Prevent overflow */
 }
 
+/* Mid Top Right */
 .container-mid-tr {
     display: flex;
     flex-direction: column; /* Stack children vertically */
@@ -104,25 +87,26 @@ form {
     margin-right: 1em;
 }
 
+/* Bottom Containers */
+.container-mid-b, .container-bottom {
+    display: none; /* Hidden by default */
+}
+
 .container-mid-b {
     display: flex;
-    flex-direction: horizontal;
+    flex-direction: row; /* Corrected from 'horizontal' to 'row' */
     align-items: center;
     justify-content: center;
 }
 
 .container-bottom {
     display: flex;
-    flex-direction: horizontal;
+    flex-direction: row; /* Corrected from 'horizontal' to 'row' */
     align-items: center;
     justify-content: center;
 }
 
-/* Hide middle and bottom containers initially */
-.container-mid, .container-bottom {
-    display: none;
-}
-
+/* Error Message Styling */
 #errorMessage {
     display: none;
     margin: 1em auto;
@@ -133,6 +117,7 @@ form {
     border-radius: 5px;
     width: fit-content;
     text-align: center;
+    animation: fadeOut 3s forwards; /* Automatically fade out after showing */
 }
 
 #errorMessage.show {
@@ -140,11 +125,18 @@ form {
     animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Fade Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* City Styling */
 #city {
     display: block;
     text-align: left;
@@ -153,14 +145,16 @@ form {
     color: rgb(58, 58, 58);
 }
 
+/* Icon and Temperature Container */
 #iconTemp {
     display: flex;
-    flex-direction: horizontal;
-    align-items: left;
-    justify-content: left;
+    flex-direction: row; /* Corrected from 'horizontal' to 'row' */
+    align-items: center;
+    justify-content: flex-start;
     margin-bottom: 1em;
 }
 
+/* Icon Styling */
 #icon {
     display: block;
     text-align: left;
@@ -170,35 +164,36 @@ form {
     margin-right: 1.25em;
 }
 
+/* Temperature Styling */
 #temp {
     font-size: 2em;
     text-align: left;
     display: block;
-    margin: -0.5em;
+    margin: -0.5em 0 0.3em 0; /* Combined margin properties */
     color: rgb(58, 58, 58);
-    margin-top: -0.3em;    
+    margin-top: -0.3em; /* Adjusted for better spacing */
 }
 
-
+/* Weather Details Styling */
 #wind, #humidity, #feels-like, #minmax, #desc {
-    color: lighten(#313E48, 20%);
+    color: rgb(58, 58, 58); /* Removed invalid 'lighten()' */
     text-align: left;
     display: block;
     font-weight: 100;
-    margin-top: -1.5em;
+    margin-top: 0.5em; /* Adjusted for better spacing */
     margin-left: 1em;
-    color: rgb(58, 58, 58);
 }
 
+/* Timezone Styling */
 #timezone {
-    color: lighten(#313E48, 20%);
+    color: rgb(58, 58, 58); /* Removed invalid 'lighten()' */
     text-align: right;
     display: block;
     font-weight: 100;
-    margin-top: -2.0em;
-    color: rgb(58, 58, 58);
+    margin-top: 0.5em; /* Adjusted for better spacing */
 }
 
+/* Search Form Styling */
 #searchForm {
     display: flex;
     align-items: center;
@@ -208,16 +203,17 @@ form {
     padding: 5px 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     width: 225px;
-    transition: ease-in-out 0.3s;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out, border-color 0.3s ease-in-out, border-width 0.3s ease-in-out;
 }
 
 #searchForm:hover {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    scale: 1.02;
+    transform: scale(1.02);
     border-color: rgb(104, 112, 209);
     border-width: 1.5px;
 }
 
+/* Textbox Styling */
 #Textbox {
     border: none;
     outline: none;
@@ -231,6 +227,7 @@ form {
     color: #888;
 }
 
+/* Button Styling */
 #Button {
     border: none;
     background: none;
@@ -246,6 +243,7 @@ form {
     color: #555;
 }
 
+/* Footer Styling */
 #footer {
     font-size: 0.75em;
     text-align: center;
@@ -254,7 +252,4 @@ form {
     bottom: 0;
     width: 100%;
     color: white;
-    text-align: center;
 }
-
-

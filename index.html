@@ -1,36 +1,51 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <title>
-        Weather App
-    </title>
+    <title>Weather App</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="script.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
 </head>
 <body>
-    <h1 id="Title">
-        Weather App
-    </h1>
-    <form>
-        <input type="text" id="Textbox" placeholder="Enter City">
-        <button id="Button" type="button">
-            <span class="material-symbols-outlined">search</span>
-        </button>
-    </form>
-    <div id="result">
-        <div id="city"></div>
-        <div id="icon"></div>
-        <div id="temp"></div>
-        <div id="desc"></div>
-        <div id="minmax"></div>
+    <div class="container-all">
+        <div id="container-top" class="container-top"> <!-- Added id="container-top" -->
+            <img src="design/icons/partly-cloudy-day-rain.svg" alt="Weather Icon" style="width: 4em; height: 4em;">
+            <h1 id="Title">Weather App</h1>
+            <form id="searchForm">
+                <input type="text" id="Textbox" placeholder="Enter City">
+                <button id="Button" type="button">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </form>
+        </div>
+        <div id="container-mid" class="container-mid"> <!-- Changed to include id -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            <div class="container-mid-t">
+                <div class="container-mid-tl">
+                    <div id="iconTemp">
+                        <div id="icon"></div>
+                        <div id="temp"></div>
+                    </div>
+                    <div id="desc"></div>
+                    <div id="minmax"></div>
+                    <div id="humidity"></div>
+                    <div id="wind"></div>
+                    <div id="feels-like"></div>
+                </div>
+                <div class="container-mid-tr">
+                    <div id="city"></div>
+                    <div id="timezone"></div> <!-- Changed from 'time' to 'timezone' -->
+                </div>
+            </div>
+        </div>
+        <div class="container-bottom">
+            <!-- Additional content if any -->
+        </div>
     </div>
 </body>
 <footer>
-
+    <p id="footer">&copy; 2025 Thien Buathong & Tampraphon Lorattanasane</p>
 </footer>
 </html>
