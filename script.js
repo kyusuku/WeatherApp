@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Our Express server runs on localhost:3000 by default
-            const response = await fetch(`https://weatherapp-krb6.onrender.com/weather?city=${encodeURIComponent(city)}`);
+            const response = await fetch(`https://weatherappprivate.onrender.com/weather?city=${encodeURIComponent(city)}`);
             const data = await response.json();
 
             if (data.success) {
