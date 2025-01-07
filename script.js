@@ -9,6 +9,9 @@ document.addEventListener('click', function (event) {
     });
 });
 
+
+const resultTimeZone = document.getElementById('timezone'); // Make global variable, so can be updated 
+
 document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('Button');
     const textbox = document.getElementById('Textbox');
@@ -21,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultHumidity = document.getElementById('humidity');
     const resultWind = document.getElementById('wind');
     const resultFeelsLike = document.getElementById('feels-like');
-    const resultTimeZone = document.getElementById('timezone'); // Updated to match HTML
 
     const errorMessage = document.getElementById('errorMessage'); 
 
@@ -58,44 +60,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const iconName = getWeatherIcon(weatherMain);
 
                 // Display the results
-                if (resultDiv) {
-                    resultDiv.style.display = 'flex';
-                }
-
-                if (resultIcon) {
-                    resultIcon.innerHTML = `<img src="${iconName}" alt="Weather Icon" style="width: 5em; height: 5em;">`;
-                }
-
-                if (resultCity) {
-                    resultCity.innerHTML = `<p>${capitalizeFirstLetter(name)}, ${country}</p>`;
-                }
-
-                if (resultTemp) {
-                    resultTemp.innerHTML = `<p>${Math.round(temp * 10) / 10}°</p>`;
-                }
-
-                if (resultDesc) {
-                    resultDesc.innerHTML = `<p>${capitalizeFirstLetter(description)}</p>`;
-                }
-
-                if (resultMinmax) {
-                    resultMinmax.innerHTML = `<p>${Math.round(weatherData.main.temp_min * 10) / 10}° / ${Math.round(weatherData.main.temp_max * 10) / 10}°</p>`;
-                }
-
-                if (resultHumidity) {
-                    resultHumidity.innerHTML = `<p>Humidity: ${weatherData.main.humidity}%</p>`;
-                }
-
-                if (resultWind) {
-                    resultWind.innerHTML = `<p>Wind Speed: ${weatherData.wind.speed}m/s</p>`;
-                }
-
-                if (resultFeelsLike) {
-                    resultFeelsLike.innerHTML = `<p>Feels Like: ${Math.round(weatherData.main.feels_like * 10) / 10}°</p>`;
-                }
+                if (resultDiv) { resultDiv.style.display = 'flex';}
+                if (resultIcon) {resultIcon.innerHTML = `<img src="${iconName}" alt="Weather Icon" style="width: 5em; height: 5em;">`;}
+                if (resultCity) {resultCity.innerHTML = `<p>${capitalizeFirstLetter(name)}, ${country}</p>`;}
+                if (resultTemp) {resultTemp.innerHTML = `<p>${Math.round(temp * 10) / 10}°</p>`;}
+                if (resultDesc) {resultDesc.innerHTML = `<p>${capitalizeFirstLetter(description)}</p>`;}
+                if (resultMinmax) {resultMinmax.innerHTML = `<p>${Math.round(weatherData.main.temp_min * 10) / 10}° / ${Math.round(weatherData.main.temp_max * 10) / 10}°</p>`;}
+                if (resultHumidity) {resultHumidity.innerHTML = `<p>Humidity: ${weatherData.main.humidity}%</p>`;}
+                if (resultWind) {resultWind.innerHTML = `<p>Wind Speed: ${weatherData.wind.speed}m/s</p>`;}
+                if (resultFeelsLike) {resultFeelsLike.innerHTML = `<p>Feels Like: ${Math.round(weatherData.main.feels_like * 10) / 10}°</p>`;}
 
                 if (resultTimeZone) {
-                    resultTimeZone.innerHTML =  `<p>${getLocalTimeFromUTCOffset(weatherData.timezone)}</p>`;
+                  updateTime(weatherData.timezone);
                 }
 
             } else {
@@ -180,23 +156,13 @@ function getLocalTimeFromUTCOffset(utcOffsetInSeconds) {
   
     // Combine date and time
     return `${dateString}, ${timeString}`; // e.g., "7 January 2024 14:30"
-    
-    // If you only want the date without time, return dateString instead:
-    // return dateString;
-  }
-  
+}
 
-// function getLocalTimeFromUTCOffset(utcOffsetInSeconds) {
-//     // Get the current UTC time
-//     const nowUTC = new Date().getTime();
+function updateTime(data) {
+  resultTimeZone.innerHTML =  `<p>${getLocalTimeFromUTCOffset(data)}</p>`;
+}
+ 
 
-//     // Calculate the local time based on the offset
-//     const localTime = new Date(nowUTC.getTime() + utcOffsetInSeconds * 1000);
-
-//     // Format the local time (e.g., HH:MM:SS)
-//     const options = { hour: '2-digit', minute: '2-digit', hour12: false };
-//     return localTime.toLocaleTimeString('en-US', options);
-// }
 
 // Utility function to get the weather icon based on weather conditions
 function getWeatherIcon(weatherMain) {
