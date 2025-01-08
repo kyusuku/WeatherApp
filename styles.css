@@ -1,17 +1,21 @@
+html {
+    padding: 0;
+    min-height: 100%;
+}
+body {
+    padding: 2.5em;
+}
+
 /* 1. Global resets and layout */
 html, body {
     margin: 0;
-    padding: 0;
-    height: 100%; /* Full viewport height */
     display: flex; /* Flexbox layout */
-    justify-content: center; /* Center horizontally */
+    justify-content: safe center; /* Center horizontally */
     align-items: center; /* Center vertically */
     font-family: 'Roboto Slab', sans-serif;
     background: linear-gradient(#e66465, #9198e5);
     background-attachment: fixed;
     color: white;
-    min-height: 100vh;
-    min-width: 510px;
 }
 
 #Title {
