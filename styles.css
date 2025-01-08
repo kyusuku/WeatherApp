@@ -208,7 +208,7 @@ form {
     }
     .container-all {
         padding: 2; /* Slightly smaller padding */
-        width: 70%; /* Ensure it fits well on smaller screens */
+        width: 80%; /* Ensure it fits well on smaller screens */
         margin-bottom: 250px;
     }
 
