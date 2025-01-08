@@ -7,7 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Use CORS so your frontend can call your backend from a different origin
-app.use(cors());
+app.use(cors({
+  origin: 'https://thienb2.github.io',
+}));
 
 // If you have JSON data in requests, you might want this:
 app.use(express.json());
