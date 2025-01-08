@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('Button');
     const textbox = document.getElementById('Textbox');
     const resultDiv = document.getElementById('container-mid');
+    const resultForecast = document.getElementById('forecast');
     const resultIcon = document.getElementById('icon');
     const resultCity = document.getElementById('city');
     const resultTemp = document.getElementById('temp');
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessage.style.display = 'block';
             // Hide results
             resultDiv.classList.remove('show');
+            resultForecast.classList.remove('show');
             return;
         }
 
@@ -93,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Finally, show the results container with a smooth “open” effect
                 resultDiv.classList.add('show');
+                resultForecast.classList.add('show');
 
             } else {
                 // Show error from server

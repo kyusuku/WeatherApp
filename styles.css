@@ -121,16 +121,56 @@ form {
     margin-right: 1em;
 }
 
-.container-mid-b {
+#forecast {
     display: flex;
-    flex-direction: horizontal;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;        
+    justify-content: space-evenly; 
+    align-items: center;        
+    flex-wrap: nowrap;          
+    /* margin-top: 1em;     
+    margin-bottom: 1em; */
+
+    /* Smooth expand/collapse logic */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    
+    /* Animate both max-height & opacity */
+    transition: max-height 1.2s ease, opacity 1s ease;
 }
 
-.container-bottom {
-    /* You can keep this hidden or remove if not used */
-    display: none;
+#forecast.show {
+    max-height: 800px; /* Enough to reveal all content */
+    opacity: 1;
+    pointer-events: auto;
+    /* If you want extra top/bottom padding to appear gradually, 
+       you can add them here or unify with the base. */
+    padding: 0.5em 1em;
+    margin-bottom: 0.75em;
+}
+
+.forecast-day {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    justify-content: center;
+    margin: 0 1em;              
+    padding: 1em;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: inherit;                
+    border-radius: 20px;
+    box-shadow: 0px 1px 7px rgba(0,0,0, 0.25);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.forecast-day p {
+    color: black;
+}
+
+.forecast-day:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Error message styling */
@@ -233,7 +273,7 @@ form {
     border: none;
     outline: none;
     flex-grow: 1;
-    font-size: px;
+    /* font-size: px; */
     background: none;
     color: #333;
 }
