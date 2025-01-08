@@ -1,3 +1,4 @@
+/* 1. Global resets and layout */
 html, body {
     margin: 0;
     padding: 0;
@@ -7,8 +8,9 @@ html, body {
     align-items: center; /* Center vertically */
     font-family: 'Roboto Slab', sans-serif;
     background: linear-gradient(#e66465, #9198e5);
+    background-attachment: fixed;
     color: white;
-    min-height: 1200px;
+    min-height: 100vh;
     min-width: 510px;
 }
 
@@ -20,7 +22,7 @@ html, body {
     font-size: 1.5em;
 }
 
-
+/* 2. Common form and error styles */
 form {
     text-align: center;
 }
@@ -30,80 +32,87 @@ form {
     border-radius: 4px;
 }
 
+/* 3. Main container */
 .container-all {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.65);
-    padding: 0.2em;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 0.2em 1em;
     border-radius: 40px;
     width: 100%;
     box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.25);
 }
 
+/* Top container with the search bar and title */
 .container-top {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    width: 500px;
 }
 
-/* #result {
-    display: none;
-    margin: 1em auto;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: inherit;
-    padding: 0.1em 0;
-    width: 30em;
-    border-radius: 40px;
-    box-shadow: 0px 1px 7px rgba(0,0,0, 0.25);
-} */
-
+/* 
+    4. The results container (.container-mid):
+       - Use max-height & overflow: hidden for a smooth expand/collapse.
+       - Initially hidden: max-height = 0, opacity = 0.
+       - On .show, transitions to some large max-height, opacity = 1.
+*/
 .container-mid {
-    display: flex;
-    flex-direction: column;
-    margin: 1em auto;
+    width: 30em;
     background-color: rgba(255, 255, 255, 0.1);
     color: inherit;
-    padding-bottom: 0.5em;
-    padding-top: 0.5em;
-    padding-left: 1em;
-    padding-right: 1em;
-    width: 30em;
     border-radius: 20px;
     box-shadow: 0px 1px 7px rgba(0,0,0, 0.25);
+
+    /* Smooth expand/collapse logic */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    
+    /* Animate both max-height & opacity */
+    transition: max-height 1.2s ease, opacity 1s ease;
+}
+
+/* When shown, we expand the container to a large enough max-height */
+.container-mid.show {
+    max-height: 800px; /* Enough to reveal all content */
+    opacity: 1;
+    pointer-events: auto;
+    /* If you want extra top/bottom padding to appear gradually, 
+       you can add them here or unify with the base. */
+    padding: 0.5em 1em;
+    margin-bottom: 0.75em;
 }
 
 .container-mid-t {
     display: flex;
-    flex-direction: row; /* Corrected from 'horizontal' to 'row' */
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between; /* Distributes space between child elements */
-    width: 100%; /* Ensure it takes full width of the parent */
-    padding: 0, 0em; /* Optional: Add horizontal padding */
-
+    justify-content: space-between;
+    width: 100%;
 }
 
 .container-mid-tl {
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: flex-start; /* Align children to the left */
-    justify-content: flex-start; /* Align children to the top */
-    flex: 1; /* Allow to grow and take available space */
-    min-width: 0; /* Prevent overflow */
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex: 1;
+    min-width: 0;
 }
 
 .container-mid-tr {
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: flex-end; /* Align children to the right */
-    justify-content: flex-start; /* Align children to the top */
-    flex: 1; /* Allow to grow and take available space */
-    min-width: 0; /* Prevent overflow */
-    margin-top: -9em;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex: 1;
+    min-width: 0;
+    margin-top: -9em; /* If you still need this offset */
     margin-right: 1em;
 }
 
@@ -115,17 +124,11 @@ form {
 }
 
 .container-bottom {
-    display: flex;
-    flex-direction: horizontal;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Hide middle and bottom containers initially */
-.container-mid, .container-bottom {
+    /* You can keep this hidden or remove if not used */
     display: none;
 }
 
+/* Error message styling */
 #errorMessage {
     display: none;
     margin: 1em auto;
@@ -148,6 +151,7 @@ form {
     to { opacity: 1; }
 }
 
+/* 5. Weather fields */
 #city {
     display: block;
     text-align: left;
@@ -182,9 +186,7 @@ form {
     margin-top: -0.3em;    
 }
 
-
 #wind, #humidity, #feels-like, #minmax, #desc {
-    color: lighten(#313E48, 20%);
     text-align: left;
     display: block;
     font-weight: 100;
@@ -194,7 +196,6 @@ form {
 }
 
 #timezone {
-    color: lighten(#313E48, 20%);
     text-align: right;
     display: block;
     font-weight: 100;
@@ -202,36 +203,7 @@ form {
     color: rgb(58, 58, 58);
 }
 
-@media only screen and (max-width: 768px) {
-    .body, .html {
-        min-height: 100vh;
-    }
-    .container-all {
-        padding: 2; /* Slightly smaller padding */
-        width: 80%; /* Ensure it fits well on smaller screens */
-        margin-bottom: 250px;
-    }
-
-    .container-top {
-        gap: 0.em; /* Reduce gap between title and search bar */
-    }
-
-    #Title {
-        font-size: 1.1em; /* Adjust font size for smaller screens */
-        text-align: center;
-        width: 110px;
-    }
-
-    #searchForm {
-        width: 2%; /* Adjust width for smaller screens */
-        padding: 5px 15px; /* Add more padding for better aesthetics */
-    }
-
-    #Textbox {
-        width: 110px;
-    }
-}
-
+/* 7. Search form styling */
 #searchForm {
     display: flex;
     align-items: center;
@@ -240,8 +212,8 @@ form {
     background-color: #f5f5f5;
     padding: 5px 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    width: 45%;
-    max-width: 240px;
+    width: 50%;
+    max-width: 250px;
     transition: ease-in-out 0.3s;
 }
 
@@ -256,7 +228,7 @@ form {
     border: none;
     outline: none;
     flex-grow: 1;
-    font-size: 14px;
+    font-size: px;
     background: none;
     color: #333;
 }
@@ -280,6 +252,7 @@ form {
     color: #555;
 }
 
+/* 8. Footer */
 #footer {
     font-size: 0.75em;
     text-align: center;
@@ -290,5 +263,3 @@ form {
     color: white;
     text-align: center;
 }
-
-
