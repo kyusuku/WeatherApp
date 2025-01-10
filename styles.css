@@ -121,16 +121,124 @@ form {
     margin-right: 1em;
 }
 
-.container-mid-b {
+#forecast {
     display: flex;
-    flex-direction: horizontal;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;        
+    justify-content: space-evenly; 
+    align-items: center;        
+    flex-wrap: nowrap;          
+    width: 30em;      
+    /* margin-top: 1em;     
+    margin-bottom: 1em; */
+
+    /* Smooth expand/collapse logic */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    
+    /* Animate both max-height & opacity */
+    transition: max-height 1.2s ease, opacity 1s ease;
 }
 
-.container-bottom {
-    /* You can keep this hidden or remove if not used */
-    display: none;
+#forecast.show {
+    max-height: 800px; /* Enough to reveal all content */
+    opacity: 1;
+    pointer-events: auto;
+    /* If you want extra top/bottom padding to appear gradually, 
+       you can add them here or unify with the base. */
+    padding: 0.5em 0;
+    margin-bottom: 0.75em;
+}
+
+.forecast-temp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.forecast-day {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+    justify-content: center;
+    margin: 0 1em;              
+    padding: 1em;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: inherit;                
+    border-radius: 20px;
+    box-shadow: 0px 1px 7px rgba(0,0,0, 0.25);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.forecast-day p {
+    color: rgb(60, 60, 60);
+}
+
+.forecast-day:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#forecast {
+    position: relative;        /* So we can position hover zones absolutely */
+    width: 30em;              /* Set a fixed width so overflow can occur */
+    height: 15em;             /* Adjust to suit your forecast card height */
+    overflow: hidden;         /* Hide anything that scrolls “outside” */
+    /* margin: 1em auto;         Center if you like */
+}
+
+/* The slider that contains all forecast-day cards horizontally */
+.forecast-slider {
+    display: flex;            /* All items in a row */
+    transition: transform 0.8s ease;
+    /* The total width should accommodate all forecast-day items */
+    width: 200%; /* If you have 5 items each 20% wide; adjust as needed */
+}
+
+/* Each forecast-day can have a fixed or percentage-based width */
+.forecast-day {
+    flex: 0 0 17.5%;  /* 5 items -> 20% each; or use a fixed width in px/em */
+    box-sizing: border-box;
+    margin: 1em;
+    /* ... your existing forecast-day styles ... */
+}
+
+.hover-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10%;             /* Half of the container’s width */
+    z-index: 9999;            /* Above the slider so it can capture hover */
+    background-color: rgba(255, 0, 0, 0); /* Fully transparent, for demo */
+}
+
+/* Left zone sits on the left half */
+.hover-zone.left {
+    left: 0;
+}
+
+/* Right zone sits on the right half */
+.hover-zone.right {
+    right: 0;
+}
+
+/* 
+    SHIFT THE SLIDER TO THE RIGHT WHEN HOVERING ON THE LEFT ZONE
+    (This example resets to 'translateX(0)' or some offset if you prefer.)
+*/
+.hover-zone.left:hover ~ .forecast-slider {
+    transform: translateX(10%);
+}
+
+/* 
+    SHIFT THE SLIDER TO THE LEFT WHEN HOVERING ON THE RIGHT ZONE 
+    (Adjust the value so you see the last items. For example, -50% or in px.)
+*/
+.hover-zone.right:hover ~ .forecast-slider {
+    transform: translateX(-43.5%);
 }
 
 /* Error message styling */
@@ -233,7 +341,7 @@ form {
     border: none;
     outline: none;
     flex-grow: 1;
-    font-size: px;
+    /* font-size: px; */
     background: none;
     color: #333;
 }

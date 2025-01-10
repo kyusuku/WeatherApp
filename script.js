@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('Button');
     const textbox = document.getElementById('Textbox');
     const resultDiv = document.getElementById('container-mid');
+    const resultForecast = document.getElementById('forecast');
     const resultIcon = document.getElementById('icon');
     const resultCity = document.getElementById('city');
     const resultTemp = document.getElementById('temp');
@@ -24,6 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultWind = document.getElementById('wind');
     const resultFeelsLike = document.getElementById('feels-like');
     const errorMessage = document.getElementById('errorMessage'); 
+
+    // Forecast field
+    const todayIcon = document.getElementById('today-icon');
+    const todayTemp = document.getElementById('today-temp');
+    const forecast1Icon = document.getElementById('tomorrow-icon');
+    const forecast1Temp = document.getElementById('tomorrow-temp');
+    const forecast2Icon = document.getElementById('dayAfterTomorrow-icon');
+    const forecast2Temp = document.getElementById('dayAfterTomorrow-temp');
+    const forecast2Day = document.getElementById('dayAfterTomorrow-day');
+    const forecast3Icon = document.getElementById('day2AfterTomorrow-icon');
+    const forecast3Temp = document.getElementById('day2AfterTomorrow-temp');
+    const forecast3Day = document.getElementById('day2AfterTomorrow-day');
+    const forecast4Icon = document.getElementById('day3AfterTomorrow-icon');
+    const forecast4Temp = document.getElementById('day3AfterTomorrow-temp');
+    const forecast4Day = document.getElementById('day3AfterTomorrow-day');
 
     // Common function to fetch and display weather data
     const fetchWeather = async () => {
@@ -41,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessage.style.display = 'block';
             // Hide results
             resultDiv.classList.remove('show');
+            resultForecast.classList.remove('show');
             return;
         }
 
@@ -50,15 +67,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (data.success) {
-                const weatherData = data.data;
+                const weatherData = data.data.weatherData;
                 const temp = weatherData.main.temp;
                 const description = weatherData.weather[0].description;
                 const weatherMain = weatherData.weather[0].main;
                 const name = weatherData.name;
                 const country = weatherData.sys.country; 
 
+                const forecastData = data.data.result;
+
                 // Utility: pick an icon
                 const iconName = getWeatherIcon(weatherMain);
+                const forecastIcon1 = getWeatherIcon(forecastData[0].weatherDescription);
+                const forecastIcon2 = getWeatherIcon(forecastData[1].weatherDescription);
+                const forecastIcon3 = getWeatherIcon(forecastData[2].weatherDescription);
+                const forecastIcon4 = getWeatherIcon(forecastData[3].weatherDescription);
 
                 // Fill in the DOM
                 if (resultIcon) {
@@ -68,13 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     resultCity.innerHTML = `<p>${capitalizeFirstLetter(name)}, ${country}</p>`;
                 }
                 if (resultTemp) {
-                    resultTemp.innerHTML = `<p>${Math.round(temp * 10) / 10}°</p>`;
+                    resultTemp.innerHTML = `<p>${customRound(temp)}°</p>`;
                 }
                 if (resultDesc) {
                     resultDesc.innerHTML = `<p>${capitalizeFirstLetter(description)}</p>`;
                 }
                 if (resultMinmax) {
-                    resultMinmax.innerHTML = `<p>${Math.round(weatherData.main.temp_min * 10) / 10}° / ${Math.round(weatherData.main.temp_max * 10) / 10}°</p>`;
+                    resultMinmax.innerHTML = `<p>${customRound(weatherData.main.temp_min)}° / ${customRound(weatherData.main.temp_max)}°</p>`;
                 }
                 if (resultHumidity) {
                     resultHumidity.innerHTML = `<p>Humidity: ${weatherData.main.humidity}%</p>`;
@@ -83,7 +106,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     resultWind.innerHTML = `<p>Wind Speed: ${weatherData.wind.speed} m/s</p>`;
                 }
                 if (resultFeelsLike) {
-                    resultFeelsLike.innerHTML = `<p>Feels Like: ${Math.round(weatherData.main.feels_like * 10) / 10}°</p>`;
+                    resultFeelsLike.innerHTML = `<p>Feels Like: ${customRound(weatherData.main.feels_like)}°</p>`;
+                }
+                if (todayIcon) {
+                    todayIcon.innerHTML = `<img src="${iconName}" alt="Weather Icon" style="width: 5em; height: 5em;">`;
+                }
+                if (todayTemp) {
+                    todayTemp.innerHTML = `<p>${customRound(weatherData.main.temp_min)}° / ${customRound(weatherData.main.temp_max)}°</p>`;
+                }
+                if (forecast1Icon) {
+                    forecast1Icon.innerHTML = `<img src="${forecastIcon1}" alt="Weather Icon" style="width: 5em; height: 5em;">`;
+                }
+                if (forecast1Temp) {
+                    forecast1Temp.innerHTML = `<p>${customRound(forecastData[0].minTemp)}° / ${customRound(forecastData[0].maxTemp)}°</p>`;
+                }
+                if (forecast2Icon) {
+                    forecast2Icon.innerHTML = `<img src="${forecastIcon2}" alt="Weather Icon" style="width: 5em; height: 5em;">`;
+                }
+                if (forecast2Temp) {
+                    forecast2Temp.innerHTML = `<p>${customRound(forecastData[1].minTemp)}° / ${customRound(forecastData[1].maxTemp)}°</p>`;
+                }
+                if (forecast2Day) {
+                    forecast2Day.innerHTML = `<p>${forecastData[1].dayOfWeek}</p>`;
+                }
+                if (forecast3Icon) {
+                    forecast3Icon.innerHTML = `<img src="${forecastIcon3}" alt="Weather Icon" style="width: 5em; height: 5em;">`;
+                }
+                if (forecast3Temp) {
+                    forecast3Temp.innerHTML = `<p>${customRound(forecastData[2].minTemp)}° / ${customRound(forecastData[2].maxTemp)}°</p>`;
+                }
+                if (forecast3Day) {
+                    forecast3Day.innerHTML = `<p>${forecastData[2].dayOfWeek}</p>`;
+                }
+                if (forecast4Icon) {
+                    forecast4Icon.innerHTML = `<img src="${forecastIcon4}" alt="Weather Icon" style="width: 5em; height: 5em;">`;
+                }
+                if (forecast4Temp) {
+                    forecast4Temp.innerHTML = `<p>${customRound(forecastData[3].minTemp)}° / ${customRound(forecastData[3].maxTemp)}°</p>`;
+                }
+                if (forecast4Day) {
+                    forecast4Day.innerHTML = `<p>${forecastData[3].dayOfWeek}</p>`;
                 }
 
                 // Update time zone if present
@@ -93,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Finally, show the results container with a smooth “open” effect
                 resultDiv.classList.add('show');
+                resultForecast.classList.add('show');
 
             } else {
                 // Show error from server
@@ -190,5 +253,16 @@ function getWeatherIcon(weatherMain) {
             return 'design/icons/fog.svg';
         default:
             return 'design/icons/not-available.svg';
+    }
+}
+
+function customRound(num) {
+    const integerPart = Math.floor(num);
+    const fractionalPart = num - integerPart;
+  
+    if (fractionalPart >= 0.5) {
+      return integerPart + 1;
+    } else {
+      return integerPart;
     }
 }
