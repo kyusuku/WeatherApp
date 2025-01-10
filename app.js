@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const e = require('express');
 require('dotenv').config(); 
 
 const app = express();
@@ -26,15 +27,52 @@ app.get('/weather', async (req, res) => {
 
     // Example endpoint for current weather data from OpenWeatherMap
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
     // Fetch weather data
     const response = await axios.get(url);
     const weatherData = response.data;
 
+    const forecastResponse = await axios.get(forecastUrl);
+    const forecastData = forecastResponse.data.list;
+
+    const groupedByDay = {};
+
+    forecastData.forEach(entry => {
+        const date = entry.dt_txt.split(" ")[0];
+        if (!groupedByDay[date]) {
+            groupedByDay[date] = [];
+        }
+        groupedByDay[date].push(entry);
+    });
+
+    const result = Object.keys(groupedByDay).slice(1, 5).map(date => {
+        const entries = groupedByDay[date];
+        const minTemps = entries.map(e => e.main.temp_min); // Collect temperatures
+        const maxTemps = entries.map(e => e.main.temp_max);
+        const minTemp = Math.min(...minTemps);
+        const maxTemp = Math.max(...maxTemps);
+
+        const noonEntry = entries.reduce((closest, current) => {
+            const currentHour = parseInt(current.dt_txt.split(" ")[1].split(":")[0], 10);
+            return Math.abs(currentHour - 12) < Math.abs(parseInt(closest.dt_txt.split(" ")[1].split(":")[0], 10) - 12)
+                ? current
+                : closest;
+        });
+
+        const weatherDescription = noonEntry.weather[0].main;
+        const dayOfWeek = new Date(noonEntry.dt * 1000).toLocaleString('en-US', { weekday: 'long' });
+
+        return { date, dayOfWeek, minTemp, maxTemp, weatherDescription };
+    });
+
     // Send the weather data back as JSON
     res.json({
       success: true,
-      data: weatherData,
+      data: {
+        weatherData,
+        result,
+      }
     });
 
   } catch (error) {

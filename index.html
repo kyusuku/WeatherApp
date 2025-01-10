@@ -41,20 +41,35 @@
             </div>
         </div>
         <div id="forecast">
+            <div class="hover-zone left"></div>
+            <div class="hover-zone right"></div>
+
+            <div class="forecast-slider">
             <div id="today" class="forecast-day">
-                <img src="design/icons/clear-day.svg" alt="Weather Icon" style="width: 5em; height: 5em;">
-                <p>26°C</p>
-                <p>Today</p>
+                    <div id="today-icon"></div>
+                    <div id="today-temp" class="forecast-temp"></div>
+                    <p>Today</p>
             </div>
             <div id="tomorrow" class="forecast-day">
-                <img src="design/icons/partly-cloudy-day.svg" alt="Weather Icon" style="width: 5em; height: 5em;">
-                <p>24°C</p>
-                <p>Monday</p>
+                    <div id="tomorrow-icon"></div>
+                    <div id="tomorrow-temp" class="forecast-temp"></div>
+                    <p>Tomorrow</p>
+                </div>
+                <div id="dayAfterTomorrow" class="forecast-day">
+                    <div id="dayAfterTomorrow-icon"></div>
+                    <div id="dayAfterTomorrow-temp" class="forecast-temp"></div>
+                    <div id="dayAfterTomorrow-day"></div>
+                </div>
+                <div id="day2AfterTomorrow" class="forecast-day">
+                    <div id="day2AfterTomorrow-icon"></div>
+                    <div id="day2AfterTomorrow-temp" class="forecast-temp"></div>
+                    <div id="day2AfterTomorrow-day"></div>
+                </div>
+                <div id="day3AfterTomorrow" class="forecast-day">
+                    <div id="day3AfterTomorrow-icon"></div>
+                    <div id="day3AfterTomorrow-temp" class="forecast-temp"></div>
+                    <div id="day3AfterTomorrow-day"></div>
             </div>
-            <div id="dayAfterTomorrow" class="forecast-day">
-                <img src="design/icons/partly-cloudy-day-rain.svg" alt="Weather Icon" style="width: 5em; height: 5em;">
-                <p>22°C</p>
-                <p>Tuesday</p>
             </div>
         </div>
     </div>
