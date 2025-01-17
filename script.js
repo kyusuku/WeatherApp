@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Call your weather API endpoint (local or remote)
-            const response = await fetch(`https://weatherappprivate.onrender.com/weather?city=${encodeURIComponent(city)}`);
+            const response = await fetch(`https://kyusuku-github-io-weatherapp.onrender.com/weather?city=${encodeURIComponent(city)}`);
             const data = await response.json();
 
             if (data.success) {
