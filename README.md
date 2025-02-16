@@ -6,10 +6,8 @@
 
 ## 🕹️ How to Use  
 
-1. 🌍 **Automatic Location Detection:** The app detects your current location and shows weather information for that city.  
-2. 🏙️ **Search by City:** Enter any city name in the search bar to get the weather for that location.  
-3. ☀️ **Weather Information:** Displays temperature, humidity, wind speed, and weather conditions like clear sky, rain, or snow.  
-4. 💨 **Unit Toggle:** Switch between **Celsius** and **Fahrenheit** for temperature readings.  
+1. 🏙️ **Search by City:** Enter any city name in the search bar to get the weather for that location.  
+2. ☀️ **Weather Information:** Displays temperature, humidity, wind speed, and weather conditions like clear sky, rain, or snow.  
 
 ---  
 
