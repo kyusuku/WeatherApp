@@ -21,11 +21,11 @@
 
 ## ✨ Features  
 
-- 🌍 **Location-based Weather:** Fetches weather data based on the user’s current location.  
+- 🌍 **Location-based Weather:** Fetches weather data based on the searched location.  
 - 🏙️ **City Search Functionality:** Allows users to search for weather info by city name.  
-- 🌡️ **Temperature Display:** Shows the temperature in both **Celsius** and **Fahrenheit**.  
+- 🌡️ **Temperature Display:** Shows the temperature in **Celsius**.  
 - 🌬️ **Additional Data:** Provides weather details like humidity, wind speed, and cloud cover.  
-- 🖥️ **Responsive Design:** Works on both desktop and mobile devices for an optimal experience.  
+- 🖥️ **Responsive Design:** Optimized to work on desktop only.  
 
 ---  
 
