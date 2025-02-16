@@ -24,7 +24,8 @@
 - 🌍 **Location-based Weather:** Fetches weather data based on the searched location.  
 - 🏙️ **City Search Functionality:** Allows users to search for weather info by city name.  
 - 🌡️ **Temperature Display:** Shows the temperature in **Celsius**.  
-- 🌬️ **Additional Data:** Provides weather details like humidity, wind speed, and cloud cover.  
+- 🌬️ **Additional Data:** Provides weather details like humidity, wind speed, and cloud cover.
+- 📅 **Forecast Feature:** A 5-day weather forecast for more detailed weather information.  
 - 🖥️ **Responsive Design:** Optimized to work on desktop only.  
 
 ---  
@@ -52,14 +53,13 @@
 This project was built with the following objectives:  
 1. 🌍 **API Integration:** Fetching data from an external API and displaying it in the UI.  
 2. 🖥️ **Asynchronous JavaScript:** Using `fetch()` and handling asynchronous code with promises.  
-3. 📱 **Responsive Web Design:** Ensuring the app works well on both desktop and mobile devices.  
+3. 📱 **Responsive Web Design:** Ensuring the smooth experience on desktop.  
 4. 🔄 **User Interaction:** Implementing a search feature and updating the UI dynamically.  
 
 ---  
 
 ## 🔮 Future Improvements  
 
-- 📅 **Forecast Feature:** Add a 5-day weather forecast for more detailed weather information.  
 - 💾 **Save Favorite Locations:** Allow users to save and easily switch between favorite cities.  
 - 🌎 **Global Language Support:** Implement a multi-language option for users worldwide.  
 - 🌐 **Weather Maps:** Show weather maps like radar images for visual weather updates.  
